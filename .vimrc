@@ -1,4 +1,5 @@
 " My nvim setup
+set guifont=DroidSansMono\ Nerd\ Font\ 11
 
 
 " Plugins
@@ -10,13 +11,18 @@ call plug#begin('~/.vim/plugged')
 		Plug 'junegunn/fzf.vim'
 		Plug 'markonm/traces.vim' " Highlights patterns. highly reccomend for regex https://github.com/markonm/traces.vim
 		Plug 'preservim/nerdtree' "File System Browser https://github.com/preservim/nerdtree
-		Plug 'jreybert/vimagit'
-		Plug 'PotatoesMAster/i3-vim-syntax' " Adds syntax highlighting for i3 config
-		Plug 'jreybery/vimagit' " Git for vim https://github.com/jreybert/vimagit
-		Plug 'terryma/vim-multiple-cursors' " Multiple Cursors https://github.com/terryma/vim-multiple-cursors
-		Plug 'ryanoasis/vim-devicons' " Vim devicons https://github.com/ryanoasis/vim-devicons
+		Plug 'preservim/nerdtree' |
+					\ Plug 'Xuyuanp/nerdtree-git-plugin'
 		Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Vim nerdtree highlighting https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
+		Plug 'ryanoasis/vim-devicons' " Vim devicons https://github.com/ryanoasis/vim-devicons
+		" Plug 'jreybert/vimagit' " Vim git extension
+		Plug 'PotatoesMaster/i3-vim-syntax' " Adds syntax highlighting for i3 config
+		Plug 'terryma/vim-multiple-cursors' " Multiple Cursors https://github.com/terryma/vim-multiple-cursors
+		Plug 'junegunn/goyo.vim' " Center text https://github.com/junegunn/goyo.vim
 call plug#end()
+
+" Disables nerd tree default icons
+
 
 " Enable autocomplete in command mode
 		set wildmode=longest,list,full
@@ -27,7 +33,6 @@ call plug#end()
 		autocmd BufWritePre * :%s/\s\+$//e
 " Run xrdb when Xresources is updated
 		autocmd BufWritePost ~/.Xresources,~/.Xdefaults ~xrdb %
-
 
 " Hotkeys
 let mapleader = ","
@@ -52,9 +57,6 @@ let mapleader = ","
 		map <C-l> <C-w>l
 " Check file in shellcheck
 "		map <leader>s :!clear && shellcheck %<CR>
-" Turn on and off spellchecker
-		map <C-s> :set spell spelllang=en_us<CR>
-		map <C-a> :set nospell<CR>
 " Copy and Paste from vim to system clipboard (need gvim installed)
 		vnoremap <C-c> "+y
 		map <C-v> "+P
@@ -75,4 +77,3 @@ set hlsearch
 set foldmethod=indent
 set foldenable
 set foldlevelstart=10
-
