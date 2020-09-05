@@ -14,3 +14,4 @@ export EDITOR=vim;
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 exec zsh
+#exec fish
