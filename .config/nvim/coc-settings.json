@@ -1,0 +1,79 @@
+{
+	"coc.preferences.formatOnSaveFiletypes": ["scala"],
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			"filetypes": [
+				"c",
+				"cpp",
+				"objc",
+				"objcpp"
+			],
+			"rootPatterns": [
+				".ccls",
+				"compile_commands.json",
+				".vim/",
+				".git/",
+				".hg/"
+			],
+			"initializationOptions": {
+				"cache": {
+					"directory": "/tmp/ccls"
+				}
+			}
+		},
+		"haskell": {
+			"command": "haskell-language-server-wrapper",
+			"args": [
+				"--lsp"
+			],
+			"rootPatterns": [
+				"*.cabal",
+				"stack.yaml",
+				"cabal.project",
+				"package.yaml",
+				"hie.yaml"
+			],
+			"filetypes": [
+				"haskell",
+				"lhaskell"
+			]
+		},
+		"elmLS": {
+			"command": "elm-language-server",
+			"filetypes": [
+				"elm"
+			],
+			"rootPatterns": [
+				"elm.json"
+			],
+			"initializationOptions": {
+				"elmPath": "elm", // optional
+				"elmFormatPath": "elm-format", // optional
+				"elmTestPath": "elm-test", // optional
+				"elmAnalyseTrigger": "change" // optional
+			}
+		},
+		"clojure-lsp": {
+			"command": "bash",
+			"args": [
+				"-c",
+				"clojure-lsp"
+			],
+			"filetypes": [
+				"clojure"
+			],
+			"rootPatterns": [
+				"project.clj"
+			],
+			"additionalSchemes": [
+				"jar",
+				"zipfile"
+			],
+			"trace.server": "verbose",
+			"initializationOptions": {}
+		}
+	}
+	//"html.format.enable": true,
+}
+//"snippets.textmateSnippetsRoots": ["/home/adem/.config/snippets"],
