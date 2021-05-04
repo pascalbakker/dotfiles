@@ -1,5 +1,4 @@
-# dotfiles
-Arch Linux Dotfiles
+# Arch Linux Dotfiles
 
 Text Editor: Neovim
 
