@@ -5,9 +5,6 @@
 #zstyle ':completion::complete:*' gain-privileges 1
 alias vim="nvim"
 
-alias gnu="man"
-
-
 
 #source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
