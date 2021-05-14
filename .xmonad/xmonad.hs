@@ -80,7 +80,7 @@ myModMask :: KeyMask
 myModMask = mod1Mask        -- Sets modkey to super/windows key
 
 myTerminal :: String
-myTerminal = "alacritty"
+myTerminal = "st"
 
 myBrowser :: String
 myBrowser = "chromium"
@@ -118,6 +118,8 @@ myStartupHook = do
     spawnOnce "conky -c $HOME/.config/conky/xmonad.conkyrc"
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x282c34  --height 22 --margin 0 --distance 6 &"
     spawnOnce "feh --bg-fill ~/Media/wallpapers/art3.png"  -- feh set random wallpaper
+    spawnOnce "xautolock -time 30 -locker slock" -- lock after 30 minutes
+    spawnOnce "mpd"
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
@@ -132,8 +134,8 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnMocp  = myTerminal ++ " -t mocp -e mocp"
-    findMocp   = title =? "mocp"
+    spawnMocp  = myTerminal ++ " -t scratchpad -e ncmpcpp --screen media_library"
+    findMocp   = title =? "ncmpcpp"
     manageMocp = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
@@ -262,7 +264,7 @@ myManageHook = composeAll . concat $
      ,[ title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )]
      ,[ className =? "brave-browser"   --> doShift ( myWorkspaces !! 1 )]
      ,[ className =? "qutebrowser"     --> doShift ( myWorkspaces !! 1 )]
-     ,[ className =? "mpv"             --> doShift ( myWorkspaces !! 3 )]
+     -- ,[ className =? "mpv"             --> doShift ( myWorkspaces !! 3 )]
      ,[className =? "discord"            --> doShift ( myWorkspaces !! 3 )]
      ,[ className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )]
      ,[ className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )]
@@ -272,7 +274,7 @@ myManageHook = composeAll . concat $
 	 ] <+> [[namedScratchpadManageHook myScratchPads]]
           where
 			 insertNewerBelow = insertPosition Below Newer
-			 myClassBelows = [ myTerminal, "st"]
+			 myClassBelows = [ myTerminal, "st", "alacritty"]
 
 myKeys :: [(String, X ())]
 myKeys =
@@ -308,14 +310,10 @@ myKeys =
 
     -- Windows navigation
         , ("M-m", windows W.focusMaster)  -- Move focus to the master window
-        , ("M-k", windows W.focusDown)    -- Move focus to the next window
-        , ("M-j", windows W.focusUp)      -- Move focus to the prev window
         , ("M-<Mouse3>", windows W.focusUp)      -- Move focus to the prev window
         , ("M-<Right>", windows W.focusDown)    -- Move focus to the next window
         , ("M-<Left>", windows W.focusUp)      -- Move focus to the prev window
         , ("M-Return", windows W.swapMaster) -- Swap the focused window and the master window
-        , ("M-S-k", windows W.swapDown)   -- Swap focused window with next window
-        , ("M-S-j", windows W.swapUp)     -- Swap focused window with prev window
         , ("M-<Backspace>", promote)      -- Moves focused window to master, others maintain order
         , ("M-S-<Tab>", rotSlavesDown)    -- Rotate all windows except master and keep focus in place
         , ("M-C-<Tab>", rotAllDown)       -- Rotate all the windows in the current stack
@@ -335,10 +333,15 @@ myKeys =
         , ("M-C-<Down>", decreaseLimit)                 -- Decrease # of windows
 
     -- Window resizing
-        , ("M-h", sendMessage Shrink)                   -- Shrink horiz window width
-        , ("M-l", sendMessage Expand)                   -- Expand horiz window width
-        , ("M-S-h", sendMessage MirrorShrink)          -- Shrink vert window width
-        , ("M-S-l", sendMessage MirrorExpand)          -- Expand vert window width
+        , ("M-S-l", windows W.swapDown)   -- Swap focused window with next window
+        , ("M-S-h", windows W.swapUp)     -- Swap focused window with prev window
+        , ("M-l", windows W.focusDown)    -- Move focus to the next window
+        , ("M-h", windows W.focusUp)      -- Move focus to the prev window
+
+        , ("M-j", sendMessage Shrink)                   -- Shrink horiz window width
+        , ("M-k", sendMessage Expand)                   -- Expand horiz window width
+        , ("M-S-j", sendMessage MirrorShrink)          -- Shrink vert window width
+        , ("M-S-k", sendMessage MirrorExpand)          -- Expand vert window width
 
     -- Sublayouts
     -- This is used to push windows to tabbed sublayouts, or pull them out of it.
@@ -378,7 +381,7 @@ main :: IO ()
 main = do
     xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc0 "
     xmonad $ ewmh def
-        { manageHook         = insertPosition Master Newer <+> myManageHook
+        { manageHook         = insertPosition Below Newer <+> myManageHook
         , handleEventHook    = docksEventHook <+> fullscreenEventHook
         , modMask            = myModMask
         , terminal           = myTerminal

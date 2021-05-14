@@ -4,8 +4,11 @@
 #setopt COMPLETE_ALIASES
 #zstyle ':completion::complete:*' gain-privileges 1
 alias vim="nvim"
+#alias sbt="sbt -ivy "$XDG_DATA_HOME"/ivy2 -sbt-dir "$XDG_DATA_HOME"/sbt"
+alias wget="wget --hsts-file="$XDG_CACHE_HOME/wget-hsts""
+alias sudo="doas"
 
-
+#alias surf="tabbed surf -e"
 #source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -110,3 +113,33 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+
+
+#Cleaning up home
+export XDG_CONFIG_HOME='/home/pascal/.config'
+export XDG_CACHE_HOME='/home/pascal/.cache'
+export XDG_DATA_HOME='/home/pascal/.local/share'
+export GOPATH="/home/pascal/go"
+export IPYTHONDIR="/home/pascal/.config/jupyter"
+export JUPYTER_CONFIG_DIR="/home/pascal/.config/jupyter"
+export CABAL_DIR="$XDG_CACHE_HOME"/cabal
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+#export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
+export LEIN_HOME="$XDG_DATA_HOME"/lein
+export STACK_ROOT="$XDG_DATA_HOME"/stack
+export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey, export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export SSB_HOME="$XDG_DATA_HOME"/zoom
+export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export HISTFILE="$XDG_DATA_HOME"/bash/history
+
+
+
+
