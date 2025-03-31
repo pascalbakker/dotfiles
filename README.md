@@ -2,6 +2,9 @@
 
 Text Editor: Neovim
 
-Window Manager: XMonad
-
 Shell: Zsh
+
+WM: Hyprland
+
+
+I no longer use xmonad, and instead use Hyprland with Wayland. Leaving the xmonad config here for legacy. 
